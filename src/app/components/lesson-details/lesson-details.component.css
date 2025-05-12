@@ -1,0 +1,19 @@
+
+.day-sunday { background-color: #e3f2fd; }
+.day-monday { background-color: #fce4ec; }
+.day-tuesday { background-color: #e8f5e9; }
+.day-wednesday { background-color: #fff3e0; }
+.day-thursday { background-color: #ede7f6; }
+.day-friday { background-color: #fff8e1; }  
+.day-default { background-color: #ffffff; }
+
+.lesson-card {
+  margin: 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  padding: 10px;
+}
+.past-date {
+    color: red;
+    font-weight: bold;
+  }
