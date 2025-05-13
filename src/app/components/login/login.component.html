@@ -1,24 +1,21 @@
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="email">Email:</label>
-      <input id="email" type="email" formControlName="email" />
-      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-        <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
-        <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
-      </div>
+
+<form class="loginForm"  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="login" >
+    <mat-label>email</mat-label>
+    <input matInput placeholder="email" type="email" formControlName="email">
+    <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+      <small class="error" *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</small>
+      <small class="error" *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format</small>
     </div>
-  
-    <div>
-      <label for="password">Password:</label>
-      <input id="password" type="password" formControlName="password" />
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-        <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
-        <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
-          Password must be at least 6 characters.
-        </small>
-      </div>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="login">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Password" type="password" formControlName="password">
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      <small class="error" *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
+      <small class="error" *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long</small>
     </div>
-  
-    <button type="submit" [disabled]="loginForm.invalid" >Login</button>
-  </form>
+  </mat-form-field>
+<button mat-raised-button [disabled]="loginForm.invalid">Login</button></form>

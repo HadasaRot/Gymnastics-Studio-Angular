@@ -1,0 +1,21 @@
+ag-grid-angular {
+    height: 500px; /* או כל גובה אחר שתרצה */
+    width: 100%;
+    display: block;
+  }
+
+
+  .details-btn {
+    padding: 4px 10px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .details-btn:hover {
+    background-color: #1976d2;
+  }
+
+  

@@ -1,0 +1,45 @@
+.loginForm {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 32px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  mat-form-field.login {
+    width: 100%;
+  }
+  
+  mat-form-field.login mat-label {
+    font-weight: 500;
+    color: #555;
+  }
+  
+   ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #f9fcfc; 
+    border-radius: 8px;
+    border: 1px solid #e0e0e0; 
+  }
+  
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline {
+    display: none;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-outline {
+    color: transparent;
+    border: none;
+  }
+  
+  ::ng-deep .mat-input-element {
+    color: #333; 
+    background-color: transparent;
+  }
+  
+  ::ng-deep .mat-form-field-label {
+    color: #7d8b94; 
+  }
