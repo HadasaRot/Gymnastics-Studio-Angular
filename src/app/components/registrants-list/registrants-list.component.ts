@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 ModuleRegistry.registerModules([AllCommunityModule]);
+import type { RowClassParams } from 'ag-grid-community';
 import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
 import type { ColDef } from 'ag-grid-community'; // Column Definition Type Interface
 import { AfterViewInit } from '@angular/core';
@@ -21,8 +22,8 @@ interface IRow {
   templateUrl: './registrants-list.component.html',
   styleUrl: './registrants-list.component.css'
 })
-export class RegistrantsListComponent implements AfterViewInit {  
-  
+export class RegistrantsListComponent implements AfterViewInit {
+
   rowData: IRow[] = [
     {
       firstName: "Noa",
@@ -32,8 +33,8 @@ export class RegistrantsListComponent implements AfterViewInit {
       lessonName: "Yoga for Beginners",
       price: 300,
       isPaid: true,
-     
-      
+
+
     },
     {
       firstName: "Shir",
@@ -43,7 +44,7 @@ export class RegistrantsListComponent implements AfterViewInit {
       lessonName: "Pilates Core",
       price: 350,
       isPaid: false,
-    
+
     },
     {
       firstName: "Orit",
@@ -53,8 +54,8 @@ export class RegistrantsListComponent implements AfterViewInit {
       lessonName: "HIIT Training",
       price: 400,
       isPaid: true,
-     
-      
+
+
     },
     {
       firstName: "Ayelet",
@@ -64,7 +65,7 @@ export class RegistrantsListComponent implements AfterViewInit {
       lessonName: "Zumba Dance",
       price: 320,
       isPaid: false,
-    
+
     },
     {
       firstName: "Tamar",
@@ -74,10 +75,10 @@ export class RegistrantsListComponent implements AfterViewInit {
       lessonName: "Stretching and Flexibility",
       price: 250,
       isPaid: true,
-      
+
     }
   ];
-  
+
   colDefs: ColDef<IRow>[] = [
     { field: "firstName", filter: 'agTextColumnFilter' },
     { field: "lastName", filter: 'agTextColumnFilter' },
@@ -95,39 +96,49 @@ export class RegistrantsListComponent implements AfterViewInit {
       filter: false
     }
     
-];
- defaultColDef: ColDef = {
-flex: 1,
-filter: true,
-floatingFilter: true,
-};
-
-ngAfterViewInit(): void {
-  // האזנה כללית לכל הלחיצות בטבלה
-  document.addEventListener('click', (event: any) => {
-    if (event.target && event.target.classList.contains('details-btn')) {
-      const rowElement = event.target.closest('.ag-row');
-      if (rowElement) {
-        const rowIndex = rowElement.getAttribute('row-index');
-        const rowData = this.rowData[parseInt(rowIndex, 10)];
-        this.showDetails(rowData);
+  ];
+  defaultColDef: ColDef = {
+    flex: 1,
+    filter: true,
+    floatingFilter: true,
+    cellStyle: (params: { data?: { isPaid?: boolean } }) => {
+      if (params.data && !params.data.isPaid) {
+        return { backgroundColor: '#e48c8c' };
       }
-    }
-  });
-}
+      return null;
+    },
+  };
 
-showDetails(row: IRow): void {
-  alert(
-    `פרטי המשתתף:\n` +
-    `שם: ${row.firstName} ${row.lastName}\n` +
-    `טלפון: ${row.phone}\n` +
-    `ת.ז: ${row.id}\n` +
-    `שיעור: ${row.lessonName}\n` +
-    `מחיר: ${row.price} ש"ח\n` +
-    `שולם: ${row.isPaid ? 'כן' : 'לא'}`
-  );
-}
+  ngAfterViewInit(): void {
+    // האזנה כללית לכל הלחיצות בטבלה
+    document.addEventListener('click', (event: any) => {
+      if (event.target && event.target.classList.contains('details-btn')) {
+        const rowElement = event.target.closest('.ag-row');
+        if (rowElement) {
+          const rowIndex = rowElement.getAttribute('row-index');
+          const rowData = this.rowData[parseInt(rowIndex, 10)];
+          this.showDetails(rowData);
+        }
+      }
+    });
+  }
 
+  
+ showDetails(row: IRow): void {
+    alert(
+      `פרטי המשתתף:\n` +
+      `שם: ${row.firstName} ${row.lastName}\n` +
+      `טלפון: ${row.phone}\n` +
+      `ת.ז: ${row.id}\n` +
+      `שיעור: ${row.lessonName}\n` +
+      `מחיר: ${row.price} ש"ח\n` +
+      `שולם: ${row.isPaid ? 'כן' : 'לא'}`
+    );
+  } 
+
+  rowClassRules = {
+    'unpaid-row': (params: RowClassParams<IRow>) => !!params.data && !params.data.isPaid
+  };
 
 
 
